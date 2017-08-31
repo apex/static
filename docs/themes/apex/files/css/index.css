@@ -278,3 +278,25 @@ details > p {
 .Footer {
   height: 100px;
 }
+
+@media screen and (max-width: 850px) {
+  html, body {
+    --header-height: 200px;
+    --padding: 30px;
+    font-size: 14px;
+  }
+
+  .Container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .Menu {
+    padding: 0 var(--padding);
+  }
+
+  .Content {
+    width: 100%;
+    padding: 0 var(--padding);
+  }
+}
