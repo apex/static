@@ -281,7 +281,7 @@ details > p {
 
 @media screen and (max-width: 850px) {
   html, body {
-    --header-height: 200px;
+    --header-height: 300px;
     --padding: 30px;
     font-size: 14px;
   }
@@ -292,6 +292,8 @@ details > p {
   }
 
   .Menu {
+    position: relative;
+    margin-top: 10px;
     padding: 0 var(--padding);
   }
 
