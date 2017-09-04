@@ -4,6 +4,18 @@ The goal of this project is to build a common toolkit for building static sites 
 
 I don't have much time for this project right now, so it only has what I need, but hopefully long-term it'll turn into something real :D.
 
+## static-docs
+
+The `static-docs` program generates a documentation website from a directory of markdown files. For example the [Up](https://apex.github.io/up/) documentation is generated with:
+
+```
+$ static-docs \
+	  -in docs \
+		-out . \
+		-title Up \
+		-subtitle "Deploy serverless apps in seconds"
+```
+
 ---
 
 [![GoDoc](https://godoc.org/github.com/apex/static?status.svg)](https://godoc.org/github.com/apex/static)
