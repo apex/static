@@ -10,10 +10,10 @@ The `static-docs` program generates a documentation website from a directory of 
 
 ```
 $ static-docs \
-	  -in docs \
-		-out . \
-		-title Up \
-		-subtitle "Deploy serverless apps in seconds"
+  -in docs \
+  -out . \
+  -title Up \
+  -subtitle "Deploy serverless apps in seconds"
 ```
 
 ---
