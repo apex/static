@@ -9,11 +9,7 @@ I don't have much time for this project right now, so it only has what I need, b
 The `static-docs` program generates a documentation website from a directory of markdown files. For example the [Up](https://apex.github.io/up/) documentation is generated with:
 
 ```
-$ static-docs \
-  -in docs \
-  -out . \
-  -title Up \
-  -subtitle "Deploy serverless apps in seconds"
+$ static-docs -in docs -out . -title Up -subtitle "Deploy serverless apps in seconds"
 ```
 
 ---
