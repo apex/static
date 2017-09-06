@@ -1,6 +1,7 @@
 package docs
 
 import (
+	"bytes"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -14,6 +15,7 @@ import (
 
 	"github.com/apex/static"
 	"github.com/apex/static/docs/themes/apex"
+	"github.com/apex/static/inject"
 )
 
 // Config options.
@@ -32,6 +34,9 @@ type Config struct {
 
 	// Theme name.
 	Theme string
+
+	// Segment write key.
+	Segment string
 }
 
 // Page model.
@@ -85,18 +90,21 @@ func Compile(c *Config) error {
 		pages = append(pages, p)
 	}
 
-	out := filepath.Join(c.Dst, "index.html")
-	f, err := os.Create(out)
-	if err != nil {
-		return errors.Wrap(err, "opening")
-	}
+	var buf bytes.Buffer
 
-	if err := render(f, c, pages); err != nil {
+	if err := render(&buf, c, pages); err != nil {
 		return errors.Wrap(err, "rendering")
 	}
 
-	if err := f.Close(); err != nil {
-		return errors.Wrap(err, "closing")
+	html := buf.String()
+
+	if c.Segment != "" {
+		html = inject.Head(html, inject.Segment(c.Segment))
+	}
+
+	out := filepath.Join(c.Dst, "index.html")
+	if err := ioutil.WriteFile(out, []byte(html), 0755); err != nil {
+		return errors.Wrap(err, "writing")
 	}
 
 	return nil

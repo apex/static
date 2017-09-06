@@ -34,6 +34,7 @@ func main() {
 	theme := flag.String("theme", "apex", "Theme name.")
 	src := flag.String("in", ".", "Source directory for markdown files.")
 	dst := flag.String("out", "build", "Output directory for the static site.")
+	segment := flag.String("segment", "", "Segment write key.")
 	flag.Parse()
 
 	println()
@@ -47,6 +48,7 @@ func main() {
 		Title:    *title,
 		Subtitle: *subtitle,
 		Theme:    *theme,
+		Segment:  *segment,
 	}
 
 	if err := docs.Compile(c); err != nil {
