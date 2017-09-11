@@ -35,6 +35,7 @@ func main() {
 	src := flag.String("in", ".", "Source directory for markdown files.")
 	dst := flag.String("out", "build", "Output directory for the static site.")
 	segment := flag.String("segment", "", "Segment write key.")
+	google := flag.String("google", "", "Google Analytics tracking id.")
 	flag.Parse()
 
 	println()
@@ -49,6 +50,7 @@ func main() {
 		Subtitle: *subtitle,
 		Theme:    *theme,
 		Segment:  *segment,
+		Google:   *google,
 	}
 
 	if err := docs.Compile(c); err != nil {

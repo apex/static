@@ -37,6 +37,9 @@ type Config struct {
 
 	// Segment write key.
 	Segment string
+
+	// Google Analytics tracking id.
+	Google string
 }
 
 // Page model.
@@ -100,6 +103,10 @@ func Compile(c *Config) error {
 
 	if c.Segment != "" {
 		html = inject.Head(html, inject.Segment(c.Segment))
+	}
+
+	if c.Google != "" {
+		html = inject.Head(html, inject.GoogleAnalytics(c.Google))
 	}
 
 	out := filepath.Join(c.Dst, "index.html")
