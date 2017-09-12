@@ -1,12 +1,12 @@
 package main
 
 import (
-	"flag"
+	"os"
 	"time"
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"
-	"github.com/tj/go/flag/usage"
+	"github.com/tj/kingpin"
 
 	"github.com/apex/static/docs"
 )
@@ -16,27 +16,17 @@ func init() {
 }
 
 func main() {
-	flag.Usage = usage.Output(&usage.Config{
-		Examples: []usage.Example{
-			{
-				Help:    "Generate site in ./build from ./docs/*.md.",
-				Command: "static-docs -title Up -in ./docs",
-			},
-			{
-				Help:    "Generate a site in ./ from ../up/docs/*.md",
-				Command: "static-docs -title Up -in ../up/docs -out .",
-			},
-		},
-	})
-
-	title := flag.String("title", "", "Site title.")
-	subtitle := flag.String("subtitle", "", "Site subtitle or slogan.")
-	theme := flag.String("theme", "apex", "Theme name.")
-	src := flag.String("in", ".", "Source directory for markdown files.")
-	dst := flag.String("out", "build", "Output directory for the static site.")
-	segment := flag.String("segment", "", "Segment write key.")
-	google := flag.String("google", "", "Google Analytics tracking id.")
-	flag.Parse()
+	app := kingpin.New("static-docs", "Generate static documentation sites")
+	app.Example("static-docs --title Up --in ./docs", "Generate site in ./build from ./docs/*.md")
+	app.Example("static-docs --title Up --in ../up/docs -out .", "Generate a site in ./ from ../up/docs/*.md")
+	title := app.Flag("title", "Site title.").String()
+	subtitle := app.Flag("subtitle", "Site subtitle or slogan.").String()
+	theme := app.Flag("theme", "Theme name.").Default("apex").String()
+	src := app.Flag("in", "Source directory for markdown files.").Default(".").String()
+	dst := app.Flag("out", "Output directory for the static site.").Default("build").String()
+	segment := app.Flag("segment", "Segment write key.").String()
+	google := app.Flag("google", "Google Analytics tracking id.").String()
+	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	println()
 	defer println()
