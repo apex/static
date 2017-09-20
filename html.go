@@ -23,7 +23,7 @@ func HeadingAnchors(r io.Reader) io.ReadCloser {
 			s.SetAttr("id", snakecase.Snakecase(s.Text()))
 		})
 
-		html, err := doc.Html()
+		html, err := doc.Find("body").Html()
 		if err != nil {
 			pw.CloseWithError(err)
 			return
