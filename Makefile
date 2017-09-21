@@ -1,5 +1,7 @@
 include github.com/tj/make/golang
 
+.DEFAULT_GOAL := generate
+
 # Generate test site.
 #
 # Just a temporary hack for now, you'll need to clone apex/up.
