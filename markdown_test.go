@@ -2,7 +2,9 @@ package static
 
 import (
 	"errors"
+	"io"
 	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
 
@@ -13,6 +15,13 @@ type errorReader struct{}
 
 func (r *errorReader) Read(b []byte) (int, error) {
 	return 0, errors.New("boom")
+}
+
+func ExampleMarkdown() {
+	r := Markdown(strings.NewReader(`Hello __World__.`))
+	io.Copy(os.Stdout, r)
+	// Output:
+	// <p>Hello <strong>World</strong>.</p>
 }
 
 func TestMarkdown(t *testing.T) {
