@@ -43,7 +43,7 @@ func HeadingAnchors(r io.Reader) io.ReadCloser {
 			text := s.Text()
 
 			if s.Is("h1") {
-				section = text + "__"
+				section = snakecase.Snakecase(text) + "__"
 			}
 
 			id := section + snakecase.Snakecase(text)
