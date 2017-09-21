@@ -278,11 +278,21 @@ details > p {
 }
 
 .Anchor {
-  margin-left: -20px;
+  position: relative;
+  margin-left: -14px;
   opacity: 0.15;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
 }
 
 .Anchor svg {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+
+.Anchor svg path {
   pointer-events: all
 }
 
