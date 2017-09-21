@@ -122,7 +122,7 @@ pre {
   color: var(--dark);
   padding: 30px;
   border-radius: 2px;
-  overflow-x: auto;
+  overflow-x: scroll;
   font: "Source Code Pro", Menlo, monospace;
   font-size: .8em;
   line-height: 1.5em;
@@ -275,6 +275,16 @@ details > p {
   text-transform: none;
   letter-spacing: normal;
   line-height: 2rem;
+}
+
+.Anchor:hover,
+.Heading:hover .Anchor {
+  opacity: 1;
+}
+
+.Anchor {
+  margin-left: -20px;
+  opacity: 0.15;
 }
 
 .Footer {

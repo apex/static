@@ -110,8 +110,21 @@ func Compile(c *Config) error {
 	}
 
 	out := filepath.Join(c.Dst, "index.html")
-	if err := ioutil.WriteFile(out, []byte(html), 0755); err != nil {
-		return errors.Wrap(err, "writing")
+
+	body := ioutil.NopCloser(strings.NewReader(html))
+	body = static.HeadingAnchors(body)
+
+	f, err := os.OpenFile(out, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		return errors.Wrap(err, "opening")
+	}
+
+	if _, err := io.Copy(f, body); err != nil {
+		return errors.Wrap(err, "copying")
+	}
+
+	if err := f.Close(); err != nil {
+		return errors.Wrap(err, "closing")
 	}
 
 	return nil
@@ -152,7 +165,7 @@ func compile(c *Config, path string) (*Page, error) {
 
 	// meta-data
 	var page Page
-	rc := static.HeadingAnchors(static.Markdown(static.Frontmatter(f, &page)))
+	rc := static.Markdown(static.Frontmatter(f, &page))
 
 	// contents
 	b, err := ioutil.ReadAll(rc)
