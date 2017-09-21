@@ -40,13 +40,13 @@ func HeadingAnchors(r io.Reader) io.ReadCloser {
 
 		var section string
 		doc.Find("h1, h2, h3, h4, h5, h6").Each(func(i int, s *dom.Selection) {
-			text := s.Text()
+			id := snakecase.Snakecase(s.Text())
 
 			if s.Is("h1") {
-				section = snakecase.Snakecase(text) + "__"
+				section = id
 			}
 
-			id := section + snakecase.Snakecase(text)
+			id = section + "__" + id
 			a := anchorEl.Clone()
 			a.SetAttr("id", id)
 			a.SetAttr("href", "#"+id)
