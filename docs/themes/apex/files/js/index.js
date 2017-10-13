@@ -44,25 +44,3 @@ function activate() {
  */
 
 window.addEventListener('scroll', e => activate())
-
-/**
- * Add smooth scrolling.
- */
-
-window.addEventListener('click', e => {
-  const el = e.target
-
-  // links only
-  if (el.nodeName != 'A') return
-
-  // url
-  const url = el.getAttribute('href')
-
-  // anchors only
-  if (url[0] != '#') return
-
-  // scrolllllllll
-  document.querySelector(url).scrollIntoView({
-    behavior: 'smooth'
-  })
-})
