@@ -2,7 +2,7 @@
  * Setup.
  */
 
-const items = document.querySelectorAll('[id]')
+const items = document.querySelectorAll('.Page')
 const links = document.querySelectorAll('.Menu a')
 
 /**
