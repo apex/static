@@ -53,7 +53,7 @@ func HeadingAnchors(r io.Reader) io.ReadCloser {
 			scope = append(scope, snakecase.Snakecase(s.Text()))
 			prev = curr
 
-			id := strings.Join(scope, "__")
+			id := strings.Join(scope, ".")
 			a := anchorEl.Clone()
 			a.SetAttr("id", id)
 			a.SetAttr("href", "#"+id)
