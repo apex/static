@@ -5,7 +5,8 @@ import (
 	"testing"
 
 	"github.com/tj/assert"
-	"github.com/apex/up/internal/inject"
+
+	"github.com/apex/static/inject"
 )
 
 var html = `<!doctype html>

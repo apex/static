@@ -2,10 +2,11 @@ package static
 
 import (
 	"io"
+	"strconv"
 	"strings"
 
 	dom "github.com/PuerkitoBio/goquery"
-	"github.com/segmentio/go-snakecase"
+	snakecase "github.com/segmentio/go-snakecase"
 )
 
 // anchorHTML is the anchor element and SVG icon.
@@ -38,15 +39,21 @@ func HeadingAnchors(r io.Reader) io.ReadCloser {
 			return
 		}
 
-		var section string
-		doc.Find("h1, h2, h3, h4, h5, h6").Each(func(i int, s *dom.Selection) {
-			id := snakecase.Snakecase(s.Text())
+		scope := []string{""}
+		prev := 1
 
-			if s.Is("h1") {
-				section = id
+		doc.Find("h1, h2, h3, h4, h5, h6").Each(func(i int, s *dom.Selection) {
+			curr, _ := strconv.Atoi(string(s.Get(0).Data[1]))
+			change := curr - prev
+
+			if change <= 0 {
+				scope = scope[:len(scope)+(change-1)]
 			}
 
-			id = section + "__" + id
+			scope = append(scope, snakecase.Snakecase(s.Text()))
+			prev = curr
+
+			id := strings.Join(scope, "__")
 			a := anchorEl.Clone()
 			a.SetAttr("id", id)
 			a.SetAttr("href", "#"+id)
