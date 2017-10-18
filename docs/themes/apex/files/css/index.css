@@ -180,6 +180,10 @@ details > p {
   width: 75%;
 }
 
+.Content img {
+  max-width: 100%;
+}
+
 .Menu {
   position: -webkit-sticky;
   position: sticky;
