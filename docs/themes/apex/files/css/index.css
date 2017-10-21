@@ -311,23 +311,20 @@ details > p {
 @media screen and (max-width: 850px) {
   html, body {
     --header-height: 300px;
-    --padding: 30px;
+    --width: 80%;
     font-size: 14px;
   }
 
-  .Container {
+  .Content-wrapper {
+    display: flex;
     flex-direction: column;
-    width: 100%;
   }
 
-  .Menu {
-    position: relative;
-    margin-top: 10px;
-    padding: 0 var(--padding);
+  .Sidebar {
+    margin-bottom: 30px;
   }
 
   .Content {
     width: 100%;
-    padding: 0 var(--padding);
   }
 }
