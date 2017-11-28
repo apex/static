@@ -4,6 +4,8 @@ The goal of this project is to build a common toolkit for building static sites 
 
 I think this technique makes much more sense than fighting tools which are designed for blogs, as we all know how to write code, it can sometime save hours to just write a few lines instead of fighting a complex system that tries to do everything. I don't have much time for OSS right now, so it only has what I need, but hopefully long-term it'll turn into something real.
 
+Deploy in a single command to the [Netlify](https://www.netlify.com/) CDN, or to AWS using [Apex Up](https://github.com/apex/up).
+
 ## Install
 
 ```bash
