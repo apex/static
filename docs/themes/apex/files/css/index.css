@@ -122,7 +122,7 @@ pre {
   color: var(--dark);
   padding: 30px;
   border-radius: 2px;
-  overflow-x: auto;
+  overflow: auto;
   font: "Source Code Pro", Menlo, monospace;
   font-size: .8em;
   line-height: 1.5em;
