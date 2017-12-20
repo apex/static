@@ -14,7 +14,7 @@ $ go get github.com/apex/static/cmd/static-docs
 
 ## Usage
 
-The `static-docs` program generates a documentation website from a directory of markdown files. For example the [Up](https://apex.github.io/up/) documentation is generated with:
+The `static-docs` program generates a documentation website from a directory of markdown files. For example the [Up](https://up.docs.apex.sh/) documentation is generated with:
 
 ```
 $ static-docs --in docs --out . --title Up --subtitle "Deploy serverless apps in seconds"
