@@ -113,6 +113,7 @@ func Compile(c *Config) error {
 
 	body := ioutil.NopCloser(strings.NewReader(html))
 	body = static.HeadingAnchors(body)
+	body = static.SyntaxHighlight(body)
 
 	f, err := os.OpenFile(out, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
 	if err != nil {
