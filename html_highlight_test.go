@@ -1,38 +1,31 @@
 package static
 
 import (
+	"io"
 	"io/ioutil"
-	"strings"
+	"os"
+	"path/filepath"
 	"testing"
+
+	"github.com/tj/assert"
 )
 
-func TestSyntaxHighlight(t *testing.T) {
-	r := ioutil.NopCloser(strings.NewReader(`
-<pre><code>
-package main
-
-func main() {
-	fmt.Println("foo")
+func fixture(t testing.TB, name string) io.ReadCloser {
+	path := filepath.Join("testdata", name)
+	f, err := os.Open(path)
+	assert.NoError(t, err, "open")
+	return f
 }
-</code></pre>
 
-<pre><code class="language-yaml">
-foo: bar
-list:
-- 1
-- 2
-</code></pre>
+func TestSyntaxHighlight(t *testing.T) {
+	in := fixture(t, "highlight_input.html")
+	out := fixture(t, "highlight_output.html")
 
-<pre><code>
-this is not even a lang
-</code></pre>
-	`))
+	got, _ := ioutil.ReadAll(SyntaxHighlight(in))
+	expect, _ := ioutil.ReadAll(out)
 
-	r = SyntaxHighlight(r)
-	got, _ := ioutil.ReadAll(r)
-	expect, _ := ioutil.ReadFile("testdata/code.html")
 	if string(got) != string(expect) {
-		t.Errorf("expected %s but got %s", string(expect), string(got))
-		// ioutil.WriteFile("testdata/code.html", got, 0644)
+		t.Errorf("\nExpected:\n\n%s\n\nGot:\n\n%s", string(expect), string(got))
+		// ioutil.WriteFile("testdata/highlight_output.html", got, 0644)
 	}
 }
