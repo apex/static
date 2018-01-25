@@ -1,0 +1,20 @@
+builds:
+  -
+    main: cmd/static-docs/main.go
+    binary: static-docs
+    goos:
+      - darwin
+      - linux
+      - windows
+      - freebsd
+      - netbsd
+      - openbsd
+    goarch:
+      - amd64
+      - 386
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^refactor'
