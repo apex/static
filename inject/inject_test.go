@@ -2,9 +2,6 @@ package inject_test
 
 import (
 	"fmt"
-	"testing"
-
-	"github.com/tj/assert"
 
 	"github.com/apex/static/inject"
 )
@@ -118,57 +115,4 @@ func ExampleVar() {
 	fmt.Printf("%s\n", inject.Var("const", "user", user))
 	// Output:
 	// <script>const user = {"name":"Tobi"}</script>
-}
-
-func TestRule_Default(t *testing.T) {
-	r := inject.Rule{Value: `<script></script>`}
-	assert.NoError(t, r.Default(), "default")
-	assert.NoError(t, r.Validate(), "validate")
-	assert.Equal(t, "literal", r.Type)
-}
-
-func TestRule_Validate(t *testing.T) {
-	r := inject.Rule{Type: "whatever"}
-	assert.NoError(t, r.Default(), "default")
-	assert.EqualError(t, r.Validate(), `invalid .type: "whatever" is invalid, must be one of:
-
-  • literal
-  • comment
-  • style
-  • script
-  • inline style
-  • inline script
-  • google analytics
-  • segment`)
-}
-
-func TestRules_Default(t *testing.T) {
-	t.Run("type literal", func(t *testing.T) {
-		rules := inject.Rules{
-			"head": []*inject.Rule{
-				{
-					Value: `<script>var user = {}</script>`,
-				},
-			},
-		}
-
-		assert.NoError(t, rules.Default(), "default")
-		assert.NoError(t, rules.Validate(), "validate")
-	})
-}
-
-func TestRules_Validate(t *testing.T) {
-	t.Run("missing value", func(t *testing.T) {
-		rules := inject.Rules{
-			"head": []*inject.Rule{
-				{
-					Type: "inline script",
-					// Value: "var user = {}",
-				},
-			},
-		}
-
-		assert.NoError(t, rules.Default(), "default")
-		assert.EqualError(t, rules.Validate(), `head rule #1: .value is required`)
-	})
 }
