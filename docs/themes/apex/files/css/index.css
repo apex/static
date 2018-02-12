@@ -14,6 +14,7 @@
   --bg: #fff;
   --fg: #868E96;
   --fg-dark: #212529;
+  --grape: #5f3dc4;
 
   --selection-bg: var(--blue);
   --selection-fg: white;
@@ -28,8 +29,7 @@ html, body {
     "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 300;
   background: var(--bg);
   color: var(--fg-dark);
@@ -69,7 +69,7 @@ a {
 
 p {
   margin: 25px 0;
-  line-height: 1.6;
+  line-height: 1.75;
   color: var(--fg-color-light);
 }
 
@@ -122,10 +122,11 @@ pre {
   color: var(--dark);
   padding: 30px;
   border-radius: 2px;
-  overflow: auto;
+  overflow-x: auto;
   font: "Source Code Pro", Menlo, monospace;
   font-size: .8em;
   line-height: 1.5em;
+  -webkit-font-smoothing: antialiased;
 }
 
 li > code,
@@ -137,6 +138,7 @@ p > code {
   white-space: nowrap;
   font-weight: 600;
   font-family: inherit;
+  -webkit-font-smoothing: antialiased;
 }
 
 details > summary {
@@ -146,7 +148,7 @@ details > summary {
 }
 
 details > p {
-  border-left: 3px solid var(--dark);
+  border-left: 3px solid var(--grape);
   padding-left: 15px;
 }
 
@@ -189,6 +191,7 @@ details > p {
   position: sticky;
   top: 50px;
   color: var(--fg-dark);
+  -webkit-font-smoothing: antialiased;
 }
 
 .Menu > .item {
