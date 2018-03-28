@@ -1,6 +1,7 @@
 package static
 
 import (
+	"bufio"
 	"io"
 	"strconv"
 	"strings"
@@ -72,4 +73,34 @@ func HeadingAnchors(r io.Reader) io.ReadCloser {
 	}()
 
 	return pr
+}
+
+// Notes returns a reader with paragraphs starting
+// with "Notes:" to be considered highlighted note.
+func Notes(r io.Reader) io.ReadCloser {
+	pr, pw := io.Pipe()
+
+	go func() {
+		scan := bufio.NewScanner(r)
+
+		for scan.Scan() {
+			io.WriteString(pw, note(scan.Text()))
+			io.WriteString(pw, "\n")
+		}
+
+		pw.CloseWithError(scan.Err())
+	}()
+
+	return pr
+}
+
+// note helper.
+func note(s string) string {
+	if !strings.HasPrefix(s, "<p>Note:") {
+		return s
+	}
+	s = strings.TrimPrefix(s, "<p>Note:")
+	s = strings.TrimSuffix(s, "</p>")
+	s = strings.TrimSpace(s)
+	return `<div class="Message"><p>` + s + `</p></div>`
 }

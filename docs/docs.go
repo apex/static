@@ -166,7 +166,7 @@ func compile(c *Config, path string) (*Page, error) {
 
 	// meta-data
 	var page Page
-	rc := static.Markdown(static.Frontmatter(f, &page))
+	rc := static.Notes(static.Markdown(static.Frontmatter(f, &page)))
 
 	// contents
 	b, err := ioutil.ReadAll(rc)

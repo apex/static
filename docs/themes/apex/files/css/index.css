@@ -311,6 +311,18 @@ details > p {
   height: 100px;
 }
 
+.Message {
+  padding: 25px;
+  background: #e7f5ff;
+  border: 1px solid #74c0fc;
+  border-radius: 3;
+  color: #1c7ed6;
+}
+
+.Message p {
+  margin: 0;
+}
+
 @media screen and (max-width: 850px) {
   html, body {
     --header-height: 300px;

@@ -52,3 +52,22 @@ func ExampleHeadingAnchors() {
 	// </a>Section 1</h2>
 	// 	</body></html>
 }
+
+func ExampleNotes() {
+	r := ioutil.NopCloser(strings.NewReader(`
+Something here.
+
+Note: Some note here about whatever nothing exciting.
+
+More content.
+	`))
+
+	r = Notes(Markdown(r))
+	io.Copy(os.Stdout, r)
+	// Output:
+	// <p>Something here.</p>
+	//
+	// <div class="Message"><p>Some note here about whatever nothing exciting.</p></div>
+	//
+	// <p>More content.</p>
+}
