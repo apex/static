@@ -312,6 +312,7 @@ details > p {
 }
 
 .Message {
+  margin: 25px 0;
   padding: 25px;
   background: #e7f5ff;
   border: 1px solid #74c0fc;
