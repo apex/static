@@ -25,7 +25,7 @@ func SyntaxHighlight(r io.Reader) io.ReadCloser {
 			return
 		}
 
-		formatter := html.New(html.WithClasses())
+		formatter := html.New(html.WithClasses(true))
 		doc.Find("pre > code").Each(func(i int, s *dom.Selection) {
 			lexer := detectLexer(s)
 			code := s.Contents().Text()
